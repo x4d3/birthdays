@@ -6,6 +6,12 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
+
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+
         <title>Anniversaires</title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -22,6 +28,7 @@
         </style>
 
         <script>
+
           const fetchUsers = async function () {
             const response = await fetch('dobs.json');
             const data = await response.json();
@@ -41,7 +48,18 @@
             return users.sort(byDays);
           }
 
-          const getAge = birthDate => Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e+10)
+          const getAge = function (birthDate) {
+            const diff = (new Date() - new Date(birthDate).getTime()) / 3.15576e+10
+            const year = Math.floor(diff)
+
+            if (year > 5) {
+              return `${ Math.floor(diff) } ans`
+            } else {
+              const yearWord = year > 1 ? "ans" : "an"
+              const month = Math.floor((diff - year) * 12)
+              return (year == 0 ? "" : `${year} ${yearWord}`)  + (month == 0 ? "": ` ${month} mois`)
+            }
+          }
 
           const daysUntilNext = function (month, day) {
             const today = new Date();
@@ -92,9 +110,7 @@
                         <div class="flex bg-white rounded-lg shadow-md m-2 border-l-4 border-white hover:shadow-2xl hover:border-pink-500 cursor-pointer relative">
                             <div class="p-4 pr-6 leading-normal">
                                 <div class="font-medium text-xl truncate" x-text="user.name"></div>
-                                <div class="truncate uppercase text-xs text-gray-500 font-semibold pb-2 tracking-widest">
-                                    <span x-text="user.age"></span> ans
-                                </div>
+                                <div class="truncate uppercase text-xs text-gray-500 font-semibold pb-2 tracking-widest" x-text="user.age"></div>
                                 <div class="" x-text="user.dobFormatted"></div>
                                 <div class="">
                                     dans <span x-text="user.days"></span> jours
