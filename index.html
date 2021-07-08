@@ -39,7 +39,7 @@
               return {
                 name: person.name,
                 dobTime: dob.getTime(),
-                dobFormatted: dob.toLocaleDateString(undefined, options),
+                dobFormatted: dob.toLocaleDateString('fr-FR', options),
                 age: getAge(dob),
                 days: daysUntilNext(dob.getMonth(), dob.getDate())
               }
