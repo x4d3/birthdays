@@ -25,6 +25,19 @@
                 height: 100%;
                 background: #edf2f7;
             }
+
+            .neon {
+                border: 0.2rem solid #fff;
+                border-radius: 2rem;
+                padding: 0.4em;
+                box-shadow: 0 0 .2rem #fff,
+                0 0 .2rem #fff,
+                0 0 2rem #E91E63,
+                0 0 0.8rem #E91E63,
+                0 0 2.8rem #E91E63,
+                inset 0 0 1.3rem #E91E63;
+            }
+
         </style>
 
         <script>
@@ -57,7 +70,7 @@
             } else {
               const yearWord = year > 1 ? "ans" : "an"
               const month = Math.floor((diff - year) * 12)
-              return (year == 0 ? "" : `${year} ${yearWord}`)  + (month == 0 ? "": ` ${month} mois`)
+              return (year == 0 ? "" : `${ year } ${ yearWord }`) + (month == 0 ? "" : ` ${ month } mois`)
             }
           }
 
@@ -107,14 +120,19 @@
             <div class="flex flex-wrap -mx-2 pb-8">
                 <template x-for="user in users">
                     <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 h-full font-light">
-                        <div class="flex bg-white rounded-lg shadow-md m-2 border-l-4 border-white hover:shadow-2xl hover:border-pink-500 cursor-pointer relative">
+                        <div x-bind:class="user.days === 0 ? 'neon' : ''"
+                             class="flex bg-white rounded-lg shadow-md m-2 border-l-4 border-white hover:shadow-2xl hover:border-pink-500 cursor-pointer relative">
                             <div class="p-4 pr-6 leading-normal">
                                 <div class="font-medium text-xl truncate" x-text="user.name"></div>
                                 <div class="truncate uppercase text-xs text-gray-500 font-semibold pb-2 tracking-widest" x-text="user.age"></div>
-                                <div class="" x-text="user.dobFormatted"></div>
-                                <div class="">
-                                    dans <span x-text="user.days"></span> jours
-                                </div>
+                                <div x-text="user.dobFormatted"></div>
+
+                                <template x-if="user.days === 0">
+                                    <div>C'est aujourd'hui !</div>
+                                </template>
+                                <template x-if="user.days !== 0">
+                                    <div>dans <span x-text="user.days"></span> jours</div>
+                                </template>
                             </div>
                         </div>
                     </div>
