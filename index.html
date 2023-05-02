@@ -62,7 +62,7 @@
           }
 
           const getAge = function (birthDate) {
-            const diff = (new Date() - new Date(birthDate).getTime()) / 3.15576e+10
+            const diff = (new Date() - new Date(birthDate).getTime()) / (1000*60*60*24*365)
             const year = Math.floor(diff)
 
             if (year > 5) {
