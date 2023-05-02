@@ -25,6 +25,8 @@
   },
   {
     "name": "Héloïse",
+    "father": "Martin",
+    "mother": "Caro",
     "dob": "2017-04-23"
   },
   {
@@ -37,10 +39,14 @@
   },
   {
     "name": "Hanaé",
+    "father": "Sébastien C",
+    "mother": "Stéphanie",
     "dob": "2015-11-12"
   },
   {
     "name": "Maxence",
+    "father": "Sébastien C",
+    "mother": "Stéphanie",
     "dob": "2018-04-19"
   },
   {
@@ -53,10 +59,14 @@
   },
   {
     "name": "Hugo",
+    "father": "Julien",
+    "mother": "Aurélie S",
     "dob": "2016-05-29"
   },
   {
     "name": "Emma",
+    "father": "Julien",
+    "mother": "Aurélie S",
     "dob": "2018-11-06"
   },
   {
@@ -69,10 +79,14 @@
   },
   {
     "name": "Julie",
+    "father": "Bruno",
+    "mother": "Sophie",
     "dob": "2016-04-24"
   },
   {
     "name": "Alexandre",
+    "father": "Bruno",
+    "mother": "Sophie",
     "dob": "2018-08-11"
   },
   {
@@ -89,6 +103,8 @@
   },
   {
     "name": "Théophile",
+    "father": "Jean-Yves",
+    "mother": "Esther D",
     "dob": "2021-05-02"
   },
   {
@@ -101,19 +117,15 @@
   },
   {
     "name": "Élodie",
+    "father": "Andy",
+    "mother": "Valérie",
     "dob": "2019-05-18"
   },
   {
     "name": "Noémie",
+    "father": "Andy",
+    "mother": "Valérie",
     "dob": "2020-11-25"
-  },
-  {
-    "name": "Thalie",
-    "dob": "2017-10-31"
-  },
-  {
-    "name": "Viviane",
-    "dob": "2020-03-12"
   },
   {
     "name": "Esther F",
@@ -124,12 +136,16 @@
     "dob": "1985-12-16"
   },
   {
-    "name": "Liam",
-    "dob": "2014-04-17"
+    "name": "Thalie",
+    "father": "Antoine",
+    "mother": "Esther F",
+    "dob": "2017-10-31"
   },
   {
-    "name": "Ewan",
-    "dob": "2011-02-13"
+    "name": "Viviane",
+    "dob": "2020-03-12",
+    "father": "Antoine",
+    "mother": "Esther F"
   },
   {
     "name": "Laure",
@@ -140,16 +156,16 @@
     "dob": "1986-07-17"
   },
   {
-    "name": "Arthur",
-    "dob": "2016-02-04"
+    "name": "Liam",
+    "father": "Bastien",
+    "mother": "Laure",
+    "dob": "2014-04-17"
   },
   {
-    "name": "Lucie",
-    "dob": "2018-01-26"
-  },
-  {
-    "name": "Laura",
-    "dob": "2020-07-27"
+    "name": "Ewan",
+    "father": "Bastien",
+    "mother": "Laure",
+    "dob": "2011-02-13"
   },
   {
     "name": "Magali",
@@ -158,6 +174,24 @@
   {
     "name": "Jack",
     "dob": "1985-12-25"
+  },
+  {
+    "name": "Arthur",
+    "father": "Jack",
+    "mother": "Magali",
+    "dob": "2016-02-04"
+  },
+  {
+    "name": "Lucie",
+    "father": "Jack",
+    "mother": "Magali",
+    "dob": "2018-01-26"
+  },
+  {
+    "name": "Laura",
+    "father": "Jack",
+    "mother": "Magali",
+    "dob": "2020-07-27"
   },
   {
     "name": "Alexandra",
@@ -169,10 +203,14 @@
   },
   {
     "name": "Clementine",
+    "father": "Charles",
+    "mother": "Alexandra",
     "dob": "2019-05-21"
   },
   {
-    "name": "Sebastien S",
+    "name": "Sébastien S",
+    "father": "Charles",
+    "mother": "Alexandra",
     "dob": "2020-12-17"
   },
   {
@@ -180,16 +218,20 @@
     "dob": "1984-10-20"
   },
   {
+    "name": "Guillaume",
+    "dob": "1985-08-18"
+  },
+  {
     "name": "Élise",
-    "dob": "2017-10-16"
+    "dob": "2017-10-16",
+    "father": "Guillaume",
+    "mother": "Amélie"
   },
   {
     "name": "Valentin",
-    "dob": "2021-03-29"
-  },
-  {
-    "name": "Guillaume",
-    "dob": "1985-08-18"
+    "dob": "2021-03-29",
+    "father": "Guillaume",
+    "mother": "Amélie"
   }
 ]
 

@@ -1,143 +1,173 @@
 <!doctype html>
 <html lang="fr" class="h-100">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
 
-        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-        <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
 
-        <title>Anniversaires</title>
+    <title>Anniversaires</title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
-        <style>
-            body, html {
-                padding: 0;
-                margin: 0;
-                height: 100%;
-                background: #edf2f7;
-            }
+    <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            background: #edf2f7;
+        }
 
-            .neon {
-                border: 0.2rem solid #fff;
-                border-radius: 2rem;
-                padding: 0.4em;
-                box-shadow: 0 0 .2rem #fff,
-                0 0 .2rem #fff,
-                0 0 2rem #E91E63,
-                0 0 0.8rem #E91E63,
-                0 0 2.8rem #E91E63,
-                inset 0 0 1.3rem #E91E63;
-            }
+        .neon {
+            border: 0.2rem solid #fff;
+            border-radius: 2rem;
+            padding: 0.4em;
+            box-shadow: 0 0 .2rem #fff,
+            0 0 .2rem #fff,
+            0 0 2rem #E91E63,
+            0 0 0.8rem #E91E63,
+            0 0 2.8rem #E91E63,
+            inset 0 0 1.3rem #E91E63;
+        }
 
-        </style>
+    </style>
 
-        <script>
+    <script>
 
-          const fetchUsers = async function () {
+        const kebabCase = string => string
+            .replace(/([a-z])([A-Z])/g, "$1-$2")
+            .replace(/[\s_]+/g, '-')
+            .toLowerCase();
+
+        const selectHtmlElement = function (id) {
+            const div = document.getElementById(id);
+            div.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+            div.click();
+        }
+        const fetchUsers = async function () {
             const response = await fetch('dobs.json');
             const data = await response.json();
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const options = {year: 'numeric', month: 'long', day: 'numeric'};
 
             const users = data.map(function (person) {
-              const dob = new Date(person.dob);
-              return {
-                name: person.name,
-                dobTime: dob.getTime(),
-                dobFormatted: dob.toLocaleDateString('fr-FR', options),
-                age: getAge(dob),
-                days: daysUntilNext(dob.getMonth(), dob.getDate())
-              }
+                const dob = new Date(person.dob);
+                return {
+                    ...person,
+                    dobTime: dob.getTime(),
+                    dobFormatted: dob.toLocaleDateString('fr-FR', options),
+                    age: getAge(dob),
+                    days: daysUntilNext(dob.getMonth(), dob.getDate())
+                }
             });
 
             return users.sort(byDays);
-          }
+        }
 
-          const getAge = function (birthDate) {
-            const diff = (new Date() - new Date(birthDate).getTime()) / (1000*60*60*24*365)
+        const getAge = function (birthDate) {
+            const diff = (new Date() - new Date(birthDate).getTime()) / (1000 * 60 * 60 * 24 * 365)
             const year = Math.floor(diff)
 
             if (year > 5) {
-              return `${ Math.floor(diff) } ans`
+                return `${Math.floor(diff)} ans`
             } else {
-              const yearWord = year > 1 ? "ans" : "an"
-              const month = Math.floor((diff - year) * 12)
-              return (year == 0 ? "" : `${ year } ${ yearWord }`) + (month == 0 ? "" : ` ${ month } mois`)
+                const yearWord = year > 1 ? "ans" : "an"
+                const month = Math.floor((diff - year) * 12)
+                return (year == 0 ? "" : `${year} ${yearWord}`) + (month == 0 ? "" : ` ${month} mois`)
             }
-          }
+        }
 
-          const daysUntilNext = function (month, day) {
+        const daysUntilNext = function (month, day) {
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             const y = today.getFullYear();
             const next = new Date(y, month, day);
             if (today > next) {
-              next.setFullYear(y + 1);
+                next.setFullYear(y + 1);
             }
             return Math.round((next - today) / 8.64e7);
-          }
+        }
 
-          const byName = function (u1, u2) {
+        const byName = function (u1, u2) {
             return u1.name.localeCompare(u2.name)
-          }
+        }
 
-          const byDays = function (u1, u2) {
+        const byDays = function (u1, u2) {
             return u1.days - u2.days;
-          };
+        };
 
-          const byAge = function (u1, u2) {
+        const byAge = function (u1, u2) {
             return u2.dobTime - u1.dobTime;
-          }
-        </script>
+        }
+    </script>
 
-        <script src="https://unpkg.com/alpinejs@3.2.1/dist/cdn.min.js" defer></script>
-    </head>
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
 
-    <body class="text-white bg-dark h-100 d-flex flex-column">
+<body class="text-white bg-dark h-100 d-flex flex-column">
 
-        <div class="h-full bg-gray-200 text-gray-800 p-4 lg:p-8"
-             x-data="{ users: [] }"
-             x-init="(async () => {users = await fetchUsers() })()">
-            <h1 class="mt-0 mb-3 font-light text-3xl">Anniversaires</h1>
+    <div class="h-full bg-gray-200 text-gray-800 p-4 lg:p-8"
+         x-data="{ users: [] }"
+         x-init="(async () => {users = await fetchUsers() })()">
+        <h1 class="mt-0 mb-3 font-light text-3xl">Anniversaires</h1>
 
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" x-on:click="users.sort(byName)">
-                Ordre alphabétique
-            </button>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" x-on:click="users.sort(byAge)">
-                Par Age
-            </button>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" x-on:click="users.sort(byDays)">
-                Prochain anniversaire
-            </button>
-            <div class="flex flex-wrap -mx-2 pb-8">
-                <template x-for="user in users">
-                    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 h-full font-light">
-                        <div x-bind:class="user.days === 0 ? 'neon' : ''"
-                             class="flex bg-white rounded-lg shadow-md m-2 border-l-4 border-white hover:shadow-2xl hover:border-pink-500 cursor-pointer relative">
-                            <div class="p-4 pr-6 leading-normal">
-                                <div class="font-medium text-xl truncate" x-text="user.name"></div>
-                                <div class="truncate uppercase text-xs text-gray-500 font-semibold pb-2 tracking-widest" x-text="user.age"></div>
-                                <div x-text="user.dobFormatted"></div>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                x-on:click="users.sort(byName)">
+            Ordre alphabétique
+        </button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                x-on:click="users.sort(byAge)">
+            Par Age
+        </button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                x-on:click="users.sort(byDays)">
+            Prochain anniversaire
+        </button>
+        <div class="flex flex-wrap -mx-2 pb-8">
+            <template x-for="user in users">
+                <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 h-full font-light">
+                    <div x-data="{ open: false }"
+                         @click="open = ! open"
+                         x-bind:id="kebabCase(user.name)"
+                         x-bind:class="(user.days === 0 || open)? 'neon' : ''"
+                         class="flex bg-white rounded-lg shadow-md m-2 border-l-4 border-white hover:shadow-2xl hover:border-pink-500 active:border-pink-500 relative">
+                        <div class="p-4 pr-6 leading-normal">
+                            <div class="font-medium text-xl truncate" x-text="user.name"></div>
+                            <div x-show="user.father && user.mother">
+                                <span class="cursor-pointer"
+                                      @click="selectHtmlElement(kebabCase(user.father))"
+                                      x-text="user.father">
 
-                                <template x-if="user.days === 0">
-                                    <div>C'est aujourd'hui !</div>
-                                </template>
-                                <template x-if="user.days !== 0">
-                                    <div>dans <span x-text="user.days"></span> jours</div>
-                                </template>
+                                </span> -
+                                <span class="cursor-pointer"
+                                      @click="selectHtmlElement(kebabCase(user.mother))"
+                                      x-text="user.mother">
+
+                                </span>
                             </div>
+
+                            <div class="truncate uppercase text-xs text-gray-500 font-semibold pb-2 tracking-widest"
+                                 x-text="user.age"></div>
+                            <div x-text="user.dobFormatted"></div>
+
+                            <template x-if="user.days === 0">
+                                <div>C'est aujourd'hui !</div>
+                            </template>
+                            <template x-if="user.days !== 0">
+                                <div>dans <span x-text="user.days"></span> jours</div>
+                            </template>
                         </div>
                     </div>
-                </template>
-            </div>
+                </div>
+            </template>
         </div>
-    </body>
+    </div>
+</body>
 </html>
