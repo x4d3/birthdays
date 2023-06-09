@@ -12,6 +12,12 @@
     "dob": "1987-12-17"
   },
   {
+    "name": "Léon",
+    "father": "Marc",
+    "mother": "Miko",
+    "dob": "2023-06-09"
+  },
+  {
     "name": "Martin",
     "dob": "1986-05-03"
   },
